@@ -1,0 +1,14 @@
+{
+  "name": "requestbin-replay"
+, "description": "Polls Requesb.in for requests and replays them locally."
+, "author": "Lakshan Perera (lakshan@laktek.com)"
+, "version": "0.0.1"
+, "main": "./requestbin_replay.js"
+, "dependencies": {
+    "underscore"    : "1.5.x"
+  , "superagent"    : "git://github.com/RGBboy/superagent.git"
+  }
+, "scripts": {
+    "start": "node requestbin_replay.js"
+  }
+}
