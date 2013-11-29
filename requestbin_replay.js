@@ -75,10 +75,10 @@ setInterval(function() {
         }
 
         outgoing.end();
+        lastFetchTime = (new Date).getTime();
         console.log('Replayed request ' + incoming.id);
       }
     });
 
-    lastFetchTime = (new Date).getTime();
   });
 }, interval);
