@@ -9,6 +9,6 @@
   , "superagent"    : "git://github.com/RGBboy/superagent.git"
   }
 , "scripts": {
-    "start": "node requestbin_replay.js"
+    "start": "export $(cat .env) && node requestbin_replay.js"
   }
 }
