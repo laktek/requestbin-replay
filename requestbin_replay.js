@@ -4,7 +4,7 @@ var _ = require('underscore');
 var fs = require('fs');
 var Request = require('superagent');
 
-var lastFetchTime = null;
+var fetchedRequests = [];
 var interval = process.env.INTERVAL || 5000;
 var hostname = process.env.REQUEST_HOST || 'requestb.in';
 var binId = process.env.REQUEST_BIN; // Request Bin ID (Required, unless you override path)
@@ -35,10 +35,10 @@ setInterval(function() {
     }
 
     var requests = res.body;
-    var lastRequestTime = null;
 
     _.each(requests, function(incoming) {
-      if (incoming.time > lastFetchTime) {
+      // check if the given request is already fetched
+      if (fetchedRequests.indexOf(incoming.id) === -1) {
         var outgoing = Request('POST', localEndpoint);
 
         //set the cert if the local endpoint requries to be SSL
@@ -75,7 +75,7 @@ setInterval(function() {
         }
 
         outgoing.end();
-        lastFetchTime = (new Date).getTime();
+        fetchedRequests.push(incoming.id);
         console.log('Replayed request ' + incoming.id);
       }
     });
